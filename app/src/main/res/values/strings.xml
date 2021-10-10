@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">My Note</string>
+    <string name="fragment_note">Fragment 1</string>
+    <string name="fragment_recycler">Fragment 2</string>
+    <string name="recycler_item">Fragment 3</string>
+    <string name="about_info">Это приложение разработано в рамках курса "Разработка приложений в Android Studio"</string>
+    <string name="fragment_note_title">Заголовок</string>
+    <string name="fragment_note_date">Дата</string>
+    <string name="fragment_note_text">Текст</string>
+    <string name="fragment_note_create_save">Сохранить</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
