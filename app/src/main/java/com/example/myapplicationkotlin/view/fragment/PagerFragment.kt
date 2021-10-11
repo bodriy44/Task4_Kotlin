@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.myapplicationkotlin.R
+import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.view.MainActivity
 
 
 class PagerFragment : Fragment() {
     var position : Int = 0
+    lateinit var note: Note
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -21,14 +24,15 @@ class PagerFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+            note = (activity as MainActivity).presenter.notes[position]
             var textView: TextView = view.findViewById(R.id.NoteTitle)
-            textView.text = (activity as MainActivity).presenter.notes[position].header
+            textView.text = note.header
 
             textView = view.findViewById(R.id.NoteDate)
-            textView.text = (activity as MainActivity).presenter.notes[position].date
+            textView.text = note.date
 
             textView = view.findViewById(R.id.NoteText)
-            textView.text = (activity as MainActivity).presenter.notes[position].body
+            textView.text = note.body
     }
 
 }
