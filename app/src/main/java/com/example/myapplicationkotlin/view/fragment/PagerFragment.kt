@@ -22,9 +22,8 @@ class PagerFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_pager, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            note = (activity as MainActivity).presenter.model.notes[position]
+            note = (activity as MainActivity).presenter.getNotes()[position]
             var textView: TextView = view.findViewById(R.id.NoteTitle)
             textView.text = note.header
 
@@ -34,5 +33,4 @@ class PagerFragment : Fragment() {
             textView = view.findViewById(R.id.NoteText)
             textView.text = note.body
     }
-
 }

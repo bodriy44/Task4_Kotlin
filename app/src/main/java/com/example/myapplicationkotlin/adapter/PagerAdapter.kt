@@ -15,6 +15,4 @@ class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         fragment.position = (position + position2) % size
         return fragment
     }
-
-
 }

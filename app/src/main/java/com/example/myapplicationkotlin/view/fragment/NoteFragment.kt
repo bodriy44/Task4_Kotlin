@@ -36,14 +36,14 @@ class NoteFragment : Fragment(R.layout.fragment_note), INoteFragment {
         super.onStart()
         (requireActivity().findViewById<View>(R.id.floatingActionButtonDelete) as FloatingActionButton).setOnClickListener { v: View? ->
             deleteNote(
-                (activity as MainActivity).presenter.model.notes[(viewPager.currentItem + adapter.position2) % adapter.size]
+                (activity as MainActivity).presenter.getNotes()[(viewPager.currentItem + adapter.position2) % adapter.size]
             )
         }
         (requireActivity().findViewById<View>(R.id.floatingActionButtonShare) as FloatingActionButton).setOnClickListener { v: View? -> shareNote() }
 
         adapter = PagerAdapter(this)
         adapter.position2 =  (activity as MainActivity).presenter.getIndexNote(note)
-        adapter.size = (activity as MainActivity).presenter.model.notes.size
+        adapter.size = (activity as MainActivity).presenter.getSize()
         viewPager = requireActivity().findViewById(R.id.pager)
         viewPager.adapter = adapter
         viewPager.isSaveEnabled = false
@@ -52,7 +52,7 @@ class NoteFragment : Fragment(R.layout.fragment_note), INoteFragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun shareNote() {
-        val note = (activity as MainActivity).presenter.model.notes[(viewPager.currentItem + adapter.position2) % adapter.size]
+        val note = (activity as MainActivity).presenter.getNotes()[(viewPager.currentItem + adapter.position2) % adapter.size]
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(

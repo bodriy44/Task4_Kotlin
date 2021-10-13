@@ -34,6 +34,10 @@ class NoteAdapter(private val onNoteClickListener: OnNoteClickListener) :
         this.notes = notes
     }
 
+    fun getNotes(): List<Note> {
+        return this.notes
+    }
+
     class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dateView: TextView
         val headerView: TextView

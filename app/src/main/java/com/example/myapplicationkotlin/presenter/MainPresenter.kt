@@ -7,8 +7,6 @@ import com.example.myapplicationkotlin.view.IMainView
 
 class MainPresenter(private var view: IMainView,  private var db: AppDatabase) {
     val model: MainModel
-    //var notes: List<Note>
-        //get() = model.getNotes()
 
     fun saveNote(note: Note) {
         model.addNote(note)
@@ -19,9 +17,17 @@ class MainPresenter(private var view: IMainView,  private var db: AppDatabase) {
         view.showCreateFragment()
     }
 
-   /* fun deleteNote(note: Note) {
-        model.deleteNote(note)
-    }*/
+    fun getNotes(): MutableList<Note>{
+        return model.notes
+    }
+
+    fun setNotes(notes: MutableList<Note>){
+        model.notes = notes
+    }
+
+    fun getSize(): Int{
+        return model.getSize()
+    }
 
     fun getIndexNote(note: Note): Int {
         return model.getIndexNote(note)
@@ -46,7 +52,6 @@ class MainPresenter(private var view: IMainView,  private var db: AppDatabase) {
     }
 
     suspend fun getAllNotes() = db.noteDao().getAll()
-
 
     init {
         model = MainModel()

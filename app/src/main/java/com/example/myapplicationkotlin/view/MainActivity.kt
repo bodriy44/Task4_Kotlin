@@ -28,9 +28,7 @@ class MainActivity : FragmentActivity(), IMainView {
         findViewById<View>(R.id.button_about).setOnClickListener { v: View? ->
             val myDialogFragment = DialogAboutFragment()
             myDialogFragment.show(supportFragmentManager.beginTransaction(), "dialog")
-
         }
-
         presenter = MainPresenter(this, AppDatabase.getDatabase(this))
         noteCreateFragment = NoteCreateFragment()
         noteFragment = NoteFragment()
@@ -45,7 +43,7 @@ class MainActivity : FragmentActivity(), IMainView {
     override fun onStart() {
         super.onStart()
         lifecycleScope.launch {
-            presenter.model.notes = (presenter.getAllNotes() as MutableList<Note>)
+            presenter.setNotes(presenter.getAllNotes() as MutableList<Note>)
             recyclerViewFragment.notes = (presenter.getAllNotes() as MutableList<Note>)
         }
     }

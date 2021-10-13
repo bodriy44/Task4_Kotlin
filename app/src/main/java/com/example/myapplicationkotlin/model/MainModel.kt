@@ -5,10 +5,6 @@ import java.util.*
 class MainModel {
     var notes: MutableList<Note>
 
-
-
-
-
     fun addNote(note: Note) {
         notes.add(note)
     }
@@ -18,6 +14,10 @@ class MainModel {
     }
     fun deleteNote(note: Note) {
         notes.removeAt(notes.indexOf(note))
+    }
+
+    fun getSize(): Int{
+        return notes.size
     }
 
     fun getNote(index: Int): Note {
