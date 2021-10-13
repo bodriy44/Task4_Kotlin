@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplicationkotlin.R
 import com.example.myapplicationkotlin.adapter.PagerAdapter
@@ -15,7 +16,7 @@ import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.view.INoteFragment
 import com.example.myapplicationkotlin.view.MainActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
+import kotlinx.coroutines.launch
 
 
 class NoteFragment : Fragment(R.layout.fragment_note), INoteFragment {
@@ -35,14 +36,14 @@ class NoteFragment : Fragment(R.layout.fragment_note), INoteFragment {
         super.onStart()
         (requireActivity().findViewById<View>(R.id.floatingActionButtonDelete) as FloatingActionButton).setOnClickListener { v: View? ->
             deleteNote(
-                (activity as MainActivity).presenter.notes[(viewPager.currentItem + adapter.position2) % adapter.size]
+                (activity as MainActivity).presenter.model.notes[(viewPager.currentItem + adapter.position2) % adapter.size]
             )
         }
         (requireActivity().findViewById<View>(R.id.floatingActionButtonShare) as FloatingActionButton).setOnClickListener { v: View? -> shareNote() }
 
         adapter = PagerAdapter(this)
         adapter.position2 =  (activity as MainActivity).presenter.getIndexNote(note)
-        adapter.size = (activity as MainActivity).presenter.notes.size
+        adapter.size = (activity as MainActivity).presenter.model.notes.size
         viewPager = requireActivity().findViewById(R.id.pager)
         viewPager.adapter = adapter
         viewPager.isSaveEnabled = false
@@ -51,7 +52,7 @@ class NoteFragment : Fragment(R.layout.fragment_note), INoteFragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun shareNote() {
-        val note = (activity as MainActivity).presenter.notes[(viewPager.currentItem + adapter.position2) % adapter.size]
+        val note = (activity as MainActivity).presenter.model.notes[(viewPager.currentItem + adapter.position2) % adapter.size]
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(
@@ -67,6 +68,8 @@ class NoteFragment : Fragment(R.layout.fragment_note), INoteFragment {
     }
 
     fun deleteNote(note: Note) {
-        (activity as MainActivity).presenter.deleteNote(note)
+        lifecycleScope.launch {
+            (activity as MainActivity).presenter.deleteNote(note)
+        }
     }
 }

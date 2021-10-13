@@ -3,13 +3,16 @@ package com.example.myapplicationkotlin.view
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.myapplicationkotlin.R
 import com.example.myapplicationkotlin.model.Note
+import com.example.myapplicationkotlin.model.database.AppDatabase
 import com.example.myapplicationkotlin.presenter.MainPresenter
 import com.example.myapplicationkotlin.view.fragment.DialogAboutFragment
 import com.example.myapplicationkotlin.view.fragment.NoteCreateFragment
 import com.example.myapplicationkotlin.view.fragment.NoteFragment
 import com.example.myapplicationkotlin.view.fragment.RecyclerViewFragment
+import kotlinx.coroutines.launch
 
 
 class MainActivity : FragmentActivity(), IMainView {
@@ -28,7 +31,7 @@ class MainActivity : FragmentActivity(), IMainView {
 
         }
 
-        presenter = MainPresenter(this)
+        presenter = MainPresenter(this, AppDatabase.getDatabase(this))
         noteCreateFragment = NoteCreateFragment()
         noteFragment = NoteFragment()
         recyclerViewFragment = RecyclerViewFragment()
@@ -37,12 +40,14 @@ class MainActivity : FragmentActivity(), IMainView {
             .commit()
 
 
-
     }
 
     override fun onStart() {
         super.onStart()
-        recyclerViewFragment.notes = presenter.notes
+        lifecycleScope.launch {
+            presenter.model.notes = (presenter.getAllNotes() as MutableList<Note>)
+            recyclerViewFragment.notes = (presenter.getAllNotes() as MutableList<Note>)
+        }
     }
 
     override fun showCreateFragment() {

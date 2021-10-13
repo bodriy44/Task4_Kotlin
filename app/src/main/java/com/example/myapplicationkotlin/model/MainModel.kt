@@ -3,14 +3,11 @@ package com.example.myapplicationkotlin.model
 import java.util.*
 
 class MainModel {
-    private var notes: MutableList<Note>
-    fun getNotes(): List<Note> {
-        return notes
-    }
+    var notes: MutableList<Note>
 
-    fun setNotes(notes: MutableList<Note>) {
-        this.notes = notes
-    }
+
+
+
 
     fun addNote(note: Note) {
         notes.add(note)

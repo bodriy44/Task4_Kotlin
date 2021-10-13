@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.myapplicationkotlin.R
 import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.view.INoteCreateFragment
 import com.example.myapplicationkotlin.view.MainActivity
+import kotlinx.coroutines.launch
 import java.util.*
 
 class NoteCreateFragment : Fragment(R.layout.fragment_note_create), INoteCreateFragment {
@@ -30,6 +32,9 @@ class NoteCreateFragment : Fragment(R.layout.fragment_note_create), INoteCreateF
     }
 
     override fun addNote() {
+        lifecycleScope.launch {
+            (activity as MainActivity).presenter.addNote(note.header, note.body)
+        }
         (activity as MainActivity).presenter.saveNote(note)
     }
 

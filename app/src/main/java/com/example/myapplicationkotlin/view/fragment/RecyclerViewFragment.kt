@@ -34,7 +34,7 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler), IRecyclerView
     }
 
     override var notes: List<Note>
-        get() = (activity as MainActivity).presenter.notes
+        get() = (activity as MainActivity).presenter.model.notes
         set(notes) {
             adapter.setNotes(notes)
             adapter.notifyDataSetChanged()
