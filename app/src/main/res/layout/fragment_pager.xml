@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
         <TextView
-            android:id="@+id/NoteTitle"
+            android:id="@+id/noteTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -15,7 +15,7 @@
             />
 
         <TextView
-            android:id="@+id/NoteDate"
+            android:id="@+id/noteDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -23,7 +23,7 @@
              />
 
         <TextView
-            android:id="@+id/NoteText"
+            android:id="@+id/noteText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/fragment_note_text"

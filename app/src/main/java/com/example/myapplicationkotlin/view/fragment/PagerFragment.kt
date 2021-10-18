@@ -24,13 +24,8 @@ class PagerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             note = (activity as MainActivity).presenter.getNotes()[position]
-            var textView: TextView = view.findViewById(R.id.NoteTitle)
-            textView.text = note.header
-
-            textView = view.findViewById(R.id.NoteDate)
-            textView.text = note.date
-
-            textView = view.findViewById(R.id.NoteText)
-            textView.text = note.body
+            view.findViewById<TextView>(R.id.noteTitle).text = note.header
+            view.findViewById<TextView>(R.id.noteDate).text = note.date
+            view.findViewById<TextView>(R.id.noteText).text = note.body
     }
 }

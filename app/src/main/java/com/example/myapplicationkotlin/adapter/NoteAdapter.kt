@@ -43,8 +43,8 @@ class NoteAdapter(private val onNoteClickListener: OnNoteClickListener) :
         val headerView: TextView
 
         init {
-            dateView = itemView.findViewById<View>(R.id.date) as TextView
-            headerView = itemView.findViewById<View>(R.id.title) as TextView
+            dateView = itemView.findViewById<TextView>(R.id.date)
+            headerView = itemView.findViewById<TextView>(R.id.title)
         }
     }
 }

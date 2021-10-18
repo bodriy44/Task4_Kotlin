@@ -13,13 +13,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplicationkotlin.R
 import com.example.myapplicationkotlin.adapter.PagerAdapter
 import com.example.myapplicationkotlin.model.Note
-import com.example.myapplicationkotlin.view.INoteFragment
+import com.example.myapplicationkotlin.view.NoteView
 import com.example.myapplicationkotlin.view.MainActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 
-class NoteFragment : Fragment(R.layout.fragment_note), INoteFragment {
+class NoteFragment : Fragment(R.layout.fragment_note), NoteView {
     lateinit var note: Note
     private lateinit var adapter: PagerAdapter
     private lateinit var viewPager: ViewPager2
@@ -34,12 +34,12 @@ class NoteFragment : Fragment(R.layout.fragment_note), INoteFragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
-        (requireActivity().findViewById<View>(R.id.floatingActionButtonDelete) as FloatingActionButton).setOnClickListener { v: View? ->
+        requireActivity().findViewById<FloatingActionButton>(R.id.floatingActionButtonDelete).setOnClickListener { v: View? ->
             deleteNote(
                 (activity as MainActivity).presenter.getNotes()[(viewPager.currentItem + adapter.position2) % adapter.size]
             )
         }
-        (requireActivity().findViewById<View>(R.id.floatingActionButtonShare) as FloatingActionButton).setOnClickListener { v: View? -> shareNote() }
+        requireActivity().findViewById<FloatingActionButton>(R.id.floatingActionButtonShare).setOnClickListener { v: View? -> shareNote() }
 
         adapter = PagerAdapter(this)
         adapter.position2 =  (activity as MainActivity).presenter.getIndexNote(note)

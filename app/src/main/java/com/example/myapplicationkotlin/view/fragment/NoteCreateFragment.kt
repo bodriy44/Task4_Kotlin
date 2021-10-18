@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplicationkotlin.R
 import com.example.myapplicationkotlin.model.Note
-import com.example.myapplicationkotlin.view.INoteCreateFragment
+import com.example.myapplicationkotlin.view.NoteCreateView
 import com.example.myapplicationkotlin.view.MainActivity
 import kotlinx.coroutines.launch
 import java.util.*
 
-class NoteCreateFragment : Fragment(R.layout.fragment_note_create), INoteCreateFragment {
+class NoteCreateFragment : Fragment(R.layout.fragment_note_create), NoteCreateView {
 
     // Создаем view который будет содержимым фрагмента и отдаем его системе
     override fun onCreateView(
@@ -27,8 +27,8 @@ class NoteCreateFragment : Fragment(R.layout.fragment_note_create), INoteCreateF
     override fun onStart() {
         super.onStart()
         requireActivity().findViewById<View>(R.id.saveButton).setOnClickListener { v: View? -> addNote() }
-        (requireActivity().findViewById<View>(R.id.editTextTitle) as EditText).setText("")
-        (requireActivity().findViewById<View>(R.id.editTextText) as EditText).setText("")
+        requireActivity().findViewById<EditText>(R.id.editTextTitle).setText("")
+        requireActivity().findViewById<EditText>(R.id.editTextText).setText("")
     }
 
     override fun addNote() {
@@ -40,8 +40,8 @@ class NoteCreateFragment : Fragment(R.layout.fragment_note_create), INoteCreateF
 
     val note: Note
         get() = Note(
-            (requireActivity().findViewById<View>(R.id.editTextTitle) as EditText).text.toString(),
-            (requireActivity().findViewById<View>(R.id.editTextText) as EditText).text.toString(),
+            requireActivity().findViewById<EditText>(R.id.editTextTitle).text.toString(),
+            requireActivity().findViewById<EditText>(R.id.editTextText).text.toString(),
             Date().toString()
         )
 }

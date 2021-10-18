@@ -7,15 +7,20 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.example.myapplicationkotlin.view.AboutActivity
 
-class DialogAboutFragment : DialogFragment() {
+class AboutDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val exInfo = "Activity не может быть null"
         return activity?.let {
             val builder = AlertDialog.Builder(it)
+            val info = "Информация"
+            val message = "Перейти на страницу информации о приложении?"
+            val negBut = "Нет"
+            val posBut = "Да"
             builder
-                .setTitle("Информация")
-                .setMessage("Перейти на страницу информации о приложении?")
-                .setNegativeButton("Нет", null)
-                .setPositiveButton("Да") { dialog, _ ->
+                .setTitle(info)
+                .setMessage(message)
+                .setNegativeButton(negBut, null)
+                .setPositiveButton(posBut) { dialog, _ ->
                     dialog.cancel()
                     startActivity(
                         Intent(
@@ -25,6 +30,6 @@ class DialogAboutFragment : DialogFragment() {
                     )
                 }
                 .create()
-        } ?: throw IllegalStateException("Activity не может быть null")
+        } ?: throw IllegalStateException(exInfo)
     }
 }

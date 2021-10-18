@@ -8,7 +8,7 @@ import com.example.myapplicationkotlin.R
 import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.model.database.AppDatabase
 import com.example.myapplicationkotlin.presenter.MainPresenter
-import com.example.myapplicationkotlin.view.fragment.DialogAboutFragment
+import com.example.myapplicationkotlin.view.fragment.AboutDialogFragment
 import com.example.myapplicationkotlin.view.fragment.NoteCreateFragment
 import com.example.myapplicationkotlin.view.fragment.NoteFragment
 import com.example.myapplicationkotlin.view.fragment.RecyclerViewFragment
@@ -24,7 +24,7 @@ class MainActivity : FragmentActivity(), IMainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         findViewById<View>(R.id.button_about).setOnClickListener { v: View? ->
-            val myDialogFragment = DialogAboutFragment()
+            val myDialogFragment = AboutDialogFragment()
             myDialogFragment.show(supportFragmentManager.beginTransaction(), "dialog")
         }
         presenter = MainPresenter(this, AppDatabase.getDatabase(this))

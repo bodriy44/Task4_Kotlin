@@ -1,5 +1,5 @@
 package com.example.myapplicationkotlin.view
 
-interface INoteFragment {
+interface NoteView {
     fun shareNote()
 }

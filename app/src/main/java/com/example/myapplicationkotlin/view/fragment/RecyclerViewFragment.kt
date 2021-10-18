@@ -1,7 +1,6 @@
 package com.example.myapplicationkotlin.view.fragment
 
 import com.example.myapplicationkotlin.R
-import com.example.myapplicationkotlin.view.IRecyclerViewFragment
 import com.example.myapplicationkotlin.view.OnNoteClickListener
 import com.example.myapplicationkotlin.adapter.NoteAdapter
 import android.view.LayoutInflater
@@ -9,12 +8,12 @@ import android.view.ViewGroup
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplicationkotlin.model.Note
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.example.myapplicationkotlin.view.MainActivity
 
-class RecyclerViewFragment : Fragment(R.layout.fragment_recycler), IRecyclerViewFragment,
+class RecyclerViewFragment : Fragment(R.layout.fragment_recycler),
+    com.example.myapplicationkotlin.view.RecyclerView,
     OnNoteClickListener {
     private lateinit var adapter: NoteAdapter
     override fun onCreateView(
@@ -23,8 +22,8 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler), IRecyclerView
     ): View? {
         val inflate = inflater.inflate(R.layout.fragment_recycler, container, false)
         adapter = NoteAdapter(this)
-        (inflate.findViewById<View>(R.id.recyclerView) as RecyclerView).adapter = adapter
-        (inflate.findViewById<View>(R.id.floatingActionButtonAddNote) as FloatingActionButton).setOnClickListener { v: View? -> createNote() }
+        inflate.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerView).adapter = adapter
+        inflate.findViewById<FloatingActionButton>(R.id.floatingActionButtonAddNote).setOnClickListener { v: View? -> createNote() }
         return inflate
     }
 

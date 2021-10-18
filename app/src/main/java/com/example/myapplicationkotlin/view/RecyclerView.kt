@@ -2,7 +2,7 @@ package com.example.myapplicationkotlin.view
 
 import com.example.myapplicationkotlin.model.Note
 
-interface IRecyclerViewFragment {
+interface RecyclerView {
     fun createNote()
     val notes: List<Note>
 }
