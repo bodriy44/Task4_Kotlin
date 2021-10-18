@@ -3,6 +3,7 @@ package com.example.myapplicationkotlin.view.fragment
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +14,20 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplicationkotlin.R
 import com.example.myapplicationkotlin.adapter.PagerAdapter
 import com.example.myapplicationkotlin.model.Note
+import com.example.myapplicationkotlin.model.database.AppDatabase
+import com.example.myapplicationkotlin.presenter.NoteFragmentPresenter
 import com.example.myapplicationkotlin.view.NoteView
 import com.example.myapplicationkotlin.view.MainActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class NoteFragment : Fragment(R.layout.fragment_note), NoteView {
+class NoteFragment(var db: AppDatabase) : Fragment(R.layout.fragment_note), NoteView {
     lateinit var note: Note
     private lateinit var adapter: PagerAdapter
     private lateinit var viewPager: ViewPager2
+    private lateinit var presenter : NoteFragmentPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,16 +39,15 @@ class NoteFragment : Fragment(R.layout.fragment_note), NoteView {
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
+
         requireActivity().findViewById<FloatingActionButton>(R.id.floatingActionButtonDelete).setOnClickListener { v: View? ->
             deleteNote(
-                (activity as MainActivity).presenter.getNotes()[(viewPager.currentItem + adapter.position2) % adapter.size]
+                presenter.getNotes()[(viewPager.currentItem + adapter.position2) % adapter.size]
             )
         }
         requireActivity().findViewById<FloatingActionButton>(R.id.floatingActionButtonShare).setOnClickListener { v: View? -> shareNote() }
 
-        adapter = PagerAdapter(this)
-        adapter.position2 =  (activity as MainActivity).presenter.getIndexNote(note)
-        adapter.size = (activity as MainActivity).presenter.getSize()
+        adapter = PagerAdapter(this, presenter.getIndexNote(note), presenter.getSize())
         viewPager = requireActivity().findViewById(R.id.pager)
         viewPager.adapter = adapter
         viewPager.isSaveEnabled = false
@@ -52,7 +56,7 @@ class NoteFragment : Fragment(R.layout.fragment_note), NoteView {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun shareNote() {
-        val note = (activity as MainActivity).presenter.getNotes()[(viewPager.currentItem + adapter.position2) % adapter.size]
+        val note = presenter.getNotes()[(viewPager.currentItem + adapter.position2) % adapter.size]
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(
@@ -67,9 +71,15 @@ class NoteFragment : Fragment(R.layout.fragment_note), NoteView {
         this.note = note
     }
 
+    fun setData(notes: MutableList<Note>){
+        presenter = NoteFragmentPresenter(db, this)
+        presenter.setNotes(notes)
+    }
+
+
     fun deleteNote(note: Note) {
         lifecycleScope.launch {
-            (activity as MainActivity).presenter.deleteNote(note)
+            presenter.deleteNote(note)
         }
     }
 }

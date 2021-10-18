@@ -11,8 +11,7 @@ import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.view.MainActivity
 
 
-class PagerFragment : Fragment() {
-    var position : Int = 0
+class PagerFragment(var position: Int) : Fragment() {
     lateinit var note: Note
 
     override fun onCreateView(

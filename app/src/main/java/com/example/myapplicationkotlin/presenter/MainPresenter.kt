@@ -1,5 +1,6 @@
 package com.example.myapplicationkotlin.presenter
 
+import android.util.Log
 import com.example.myapplicationkotlin.model.MainModel
 import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.model.database.AppDatabase
@@ -25,18 +26,9 @@ class MainPresenter(private var view: IMainView,  private var db: AppDatabase) {
         model.notes = notes
     }
 
-    fun getSize(): Int{
-        return model.getSize()
-    }
-
-    fun getIndexNote(note: Note): Int {
-        return model.getIndexNote(note)
-    }
-
     fun showNote(index: Int) {
         view.showNote(model.getNote(index))
     }
-
 
     private suspend fun addNote(note: Note) {
         db.noteDao().addNote(note)
@@ -44,11 +36,6 @@ class MainPresenter(private var view: IMainView,  private var db: AppDatabase) {
 
     suspend fun addNote(title: String, text: String) {
         addNote(Note(title, text))
-    }
-
-    suspend fun deleteNote(note: Note){
-        db.noteDao().deleteNote(note)
-        model.deleteNote(note)
     }
 
     suspend fun getAllNotes() = db.noteDao().getAll()

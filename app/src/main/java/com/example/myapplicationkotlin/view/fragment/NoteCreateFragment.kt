@@ -32,10 +32,7 @@ class NoteCreateFragment : Fragment(R.layout.fragment_note_create), NoteCreateVi
     }
 
     override fun addNote() {
-        lifecycleScope.launch {
-            (activity as MainActivity).presenter.addNote(note.header, note.body)
-        }
-        (activity as MainActivity).presenter.saveNote(note)
+        (activity as MainActivity).newNote(note)
     }
 
     val note: Note
