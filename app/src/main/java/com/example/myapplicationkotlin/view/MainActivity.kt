@@ -16,8 +16,6 @@ import kotlinx.coroutines.launch
 
 
 class MainActivity : FragmentActivity(), IMainView {
-
-
     lateinit var presenter: MainPresenter
     private lateinit var noteCreateFragment: NoteCreateFragment
     lateinit var noteFragment: NoteFragment
@@ -36,8 +34,6 @@ class MainActivity : FragmentActivity(), IMainView {
         supportFragmentManager.beginTransaction()
             .add(R.id.fragmentContainerView, recyclerViewFragment)
             .commit()
-
-
     }
 
     override fun onStart() {
