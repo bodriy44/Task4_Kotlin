@@ -1,6 +1,5 @@
 package com.example.myapplicationkotlin.presenter
 
-import android.util.Log
 import com.example.myapplicationkotlin.model.MainModel
 import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.model.database.AppDatabase

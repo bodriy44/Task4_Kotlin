@@ -8,12 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.myapplicationkotlin.R
 import com.example.myapplicationkotlin.model.Note
-import com.example.myapplicationkotlin.presenter.NoteFragmentPresenter
-import com.example.myapplicationkotlin.view.MainActivity
-
 
 class PagerFragment(var note: Note) : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

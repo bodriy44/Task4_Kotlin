@@ -4,8 +4,6 @@ import com.example.myapplicationkotlin.model.MainModel
 import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.model.database.AppDatabase
 import com.example.myapplicationkotlin.view.IMainView
-import com.example.myapplicationkotlin.view.NoteView
-import com.example.myapplicationkotlin.view.RecyclerView
 
 class RecyclerViewPresenter (var db: AppDatabase, var view: IMainView) {
     private val model: MainModel

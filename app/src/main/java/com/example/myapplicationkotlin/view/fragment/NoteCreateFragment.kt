@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.example.myapplicationkotlin.R
 import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.view.NoteCreateView
 import com.example.myapplicationkotlin.view.MainActivity
-import kotlinx.coroutines.launch
 import java.util.*
 
 class NoteCreateFragment : Fragment(R.layout.fragment_note_create), NoteCreateView {

@@ -6,18 +6,13 @@ import com.example.myapplicationkotlin.adapter.NoteAdapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.model.database.AppDatabase
-import com.example.myapplicationkotlin.presenter.NoteFragmentPresenter
 import com.example.myapplicationkotlin.presenter.RecyclerViewPresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.example.myapplicationkotlin.view.MainActivity
-import kotlinx.coroutines.launch
-import java.sql.Types.NULL
 
 class RecyclerViewFragment(var db: AppDatabase) : Fragment(R.layout.fragment_recycler),
     com.example.myapplicationkotlin.view.RecyclerView,
@@ -57,7 +52,6 @@ class RecyclerViewFragment(var db: AppDatabase) : Fragment(R.layout.fragment_rec
     }
 
     fun setData(notes: MutableList<Note>){
-        Log.i("notes", "4")
         presenter = RecyclerViewPresenter(db, activity as MainActivity)
         presenter.setNotes(notes)
     }

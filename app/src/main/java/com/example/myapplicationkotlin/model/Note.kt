@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-
 @Entity(tableName = "notes")
 data class Note (
     @ColumnInfo(name = "note_title") val header: String,

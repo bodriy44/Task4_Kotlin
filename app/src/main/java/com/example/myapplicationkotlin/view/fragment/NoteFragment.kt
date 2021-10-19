@@ -19,7 +19,6 @@ import com.example.myapplicationkotlin.view.NoteView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
-
 class NoteFragment(var db: AppDatabase) : Fragment(R.layout.fragment_note), NoteView {
     lateinit var note: Note
     private lateinit var adapter: PagerAdapter
@@ -72,7 +71,6 @@ class NoteFragment(var db: AppDatabase) : Fragment(R.layout.fragment_note), Note
         presenter = NoteFragmentPresenter(db, this)
         presenter.setNotes(notes)
     }
-
 
     fun deleteNote(note: Note) {
         lifecycleScope.launch {

@@ -1,9 +1,7 @@
 package com.example.myapplicationkotlin.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.EditText
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplicationkotlin.R
