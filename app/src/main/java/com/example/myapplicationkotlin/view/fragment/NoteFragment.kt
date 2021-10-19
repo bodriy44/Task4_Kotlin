@@ -3,7 +3,6 @@ package com.example.myapplicationkotlin.view.fragment
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +16,7 @@ import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.model.database.AppDatabase
 import com.example.myapplicationkotlin.presenter.NoteFragmentPresenter
 import com.example.myapplicationkotlin.view.NoteView
-import com.example.myapplicationkotlin.view.MainActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -47,7 +44,7 @@ class NoteFragment(var db: AppDatabase) : Fragment(R.layout.fragment_note), Note
         }
         requireActivity().findViewById<FloatingActionButton>(R.id.floatingActionButtonShare).setOnClickListener { v: View? -> shareNote() }
 
-        adapter = PagerAdapter(this, presenter.getIndexNote(note), presenter.getSize())
+        adapter = PagerAdapter(this, presenter.getIndexNote(note), presenter.getSize(),  presenter.getNotes())
         viewPager = requireActivity().findViewById(R.id.pager)
         viewPager.adapter = adapter
         viewPager.isSaveEnabled = false

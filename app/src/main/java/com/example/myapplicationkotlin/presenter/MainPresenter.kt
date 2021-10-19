@@ -14,20 +14,12 @@ class MainPresenter(private var view: IMainView,  private var db: AppDatabase) {
         view.showRecycler()
     }
 
-    fun createNote() {
-        view.showCreateFragment()
-    }
-
     fun getNotes(): MutableList<Note>{
         return model.notes
     }
 
     fun setNotes(notes: MutableList<Note>){
         model.notes = notes
-    }
-
-    fun showNote(index: Int) {
-        view.showNote(model.getNote(index))
     }
 
     private suspend fun addNote(note: Note) {

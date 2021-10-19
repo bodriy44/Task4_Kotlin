@@ -3,31 +3,30 @@ package com.example.myapplicationkotlin.presenter
 import com.example.myapplicationkotlin.model.MainModel
 import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.model.database.AppDatabase
+import com.example.myapplicationkotlin.view.IMainView
 import com.example.myapplicationkotlin.view.NoteView
+import com.example.myapplicationkotlin.view.RecyclerView
 
-class NoteFragmentPresenter(var db: AppDatabase, var view: NoteView) {
+class RecyclerViewPresenter (var db: AppDatabase, var view: IMainView) {
     private val model: MainModel
 
     fun setNotes(notes: MutableList<Note>){
         model.notes = notes
     }
 
+    fun createNote() {
+        view.showCreateFragment()
+    }
+
+    fun showNote(index: Int) {
+        view.showNote(model.getNote(index))
+    }
+
     fun getNotes(): MutableList<Note>{
         return model.notes
     }
 
-    fun getIndexNote(note: Note): Int {
-        return model.getIndexNote(note)
-    }
-
-    fun getSize(): Int{
-        return model.getSize()
-    }
-
-    suspend fun deleteNote(note: Note){
-        db.noteDao().deleteNote(note)
-        model.deleteNote(note)
-    }
+    suspend fun getAllNotes() = db.noteDao().getAll()
 
     init {
         model = MainModel()

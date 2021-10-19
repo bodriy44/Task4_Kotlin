@@ -1,6 +1,7 @@
 package com.example.myapplicationkotlin.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.fragment.app.FragmentActivity
@@ -32,17 +33,19 @@ class MainActivity : FragmentActivity(), IMainView {
         noteCreateFragment = NoteCreateFragment()
         noteFragment = NoteFragment(AppDatabase.getDatabase(this))
 
-        recyclerViewFragment = RecyclerViewFragment()
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragmentContainerView, recyclerViewFragment)
-            .commit()
+
+        recyclerViewFragment = RecyclerViewFragment(AppDatabase.getDatabase(this))
+        lifecycleScope.launch {
+            recyclerViewFragment.setData(presenter.getAllNotes() as MutableList<Note>)
+        }
+        showRecycler()
     }
 
     override fun onStart() {
         super.onStart()
         lifecycleScope.launch {
             presenter.setNotes(presenter.getAllNotes() as MutableList<Note>)
-            recyclerViewFragment.notes = (presenter.getAllNotes() as MutableList<Note>)
+            recyclerViewFragment.initAdapter(presenter.getAllNotes() as MutableList<Note>)
             noteFragment.setData(presenter.getNotes())
         }
 
@@ -72,8 +75,8 @@ class MainActivity : FragmentActivity(), IMainView {
     fun newNote(note: Note){
         lifecycleScope.launch {
             presenter.addNote(note.header, note.body)
+            recyclerViewFragment.setData(presenter.getNotes())
         }
         presenter.saveNote(note)
     }
-
 }
