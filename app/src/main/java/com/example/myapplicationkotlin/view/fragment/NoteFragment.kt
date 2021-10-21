@@ -45,10 +45,8 @@ class NoteFragment(var db: AppDatabase) : Fragment(R.layout.fragment_note), Note
 
         adapter = PagerAdapter(this, presenter.getIndexNote(note), presenter.getSize(),  presenter.getNotes())
         viewPager = requireActivity().findViewById(R.id.pager)
-        with(viewPager){
-            adapter = adapter
-            isSaveEnabled = false
-        }
+        viewPager.adapter = adapter
+        viewPager.isSaveEnabled = false
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
