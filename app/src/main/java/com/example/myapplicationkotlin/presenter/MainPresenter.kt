@@ -3,9 +3,9 @@ package com.example.myapplicationkotlin.presenter
 import com.example.myapplicationkotlin.model.MainModel
 import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.model.database.AppDatabase
-import com.example.myapplicationkotlin.view.IMainView
+import com.example.myapplicationkotlin.view.MainView
 
-class MainPresenter(private var view: IMainView,  private var db: AppDatabase) {
+class MainPresenter(private var view: MainView, private var db: AppDatabase) {
     val model: MainModel
 
     fun saveNote(note: Note) {

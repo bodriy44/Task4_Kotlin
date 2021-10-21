@@ -2,7 +2,7 @@ package com.example.myapplicationkotlin.view
 
 import com.example.myapplicationkotlin.model.Note
 
-interface IMainView {
+interface MainView {
     fun showCreateFragment()
     fun showRecycler()
     fun showNote(note: Note)

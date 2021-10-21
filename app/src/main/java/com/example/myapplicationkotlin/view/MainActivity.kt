@@ -15,7 +15,7 @@ import com.example.myapplicationkotlin.view.fragment.RecyclerViewFragment
 import kotlinx.coroutines.launch
 
 
-class MainActivity : FragmentActivity(), IMainView {
+class MainActivity : FragmentActivity(), MainView {
     lateinit var presenter: MainPresenter
     private lateinit var noteCreateFragment: NoteCreateFragment
     lateinit var noteFragment: NoteFragment

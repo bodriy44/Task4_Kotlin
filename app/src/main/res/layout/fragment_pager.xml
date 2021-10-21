@@ -28,4 +28,4 @@
             android:layout_height="wrap_content"
             android:text="@string/fragment_note_text"
             android:textSize="@dimen/fragment_note_text_view_text_size2" />
-    </LinearLayout>
+</LinearLayout>

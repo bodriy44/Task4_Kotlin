@@ -3,9 +3,9 @@ package com.example.myapplicationkotlin.presenter
 import com.example.myapplicationkotlin.model.MainModel
 import com.example.myapplicationkotlin.model.Note
 import com.example.myapplicationkotlin.model.database.AppDatabase
-import com.example.myapplicationkotlin.view.IMainView
+import com.example.myapplicationkotlin.view.MainView
 
-class RecyclerViewPresenter (var db: AppDatabase, var view: IMainView) {
+class RecyclerViewPresenter (var db: AppDatabase, var view: MainView) {
     private val model: MainModel
 
     fun setNotes(notes: MutableList<Note>){

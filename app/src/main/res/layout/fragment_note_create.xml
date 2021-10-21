@@ -33,4 +33,4 @@
             android:text="@string/fragment_note_create_save"
             app:layout_constraintTop_toBottomOf="@id/editTextText"
             android:orientation="vertical"/>
-    </LinearLayout>
+</LinearLayout>
