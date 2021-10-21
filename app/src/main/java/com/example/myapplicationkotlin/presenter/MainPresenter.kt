@@ -13,9 +13,7 @@ class MainPresenter(private var view: IMainView,  private var db: AppDatabase) {
         view.showRecycler()
     }
 
-    fun getNotes(): MutableList<Note>{
-        return model.notes
-    }
+    fun getNotes() = model.notes
 
     fun setNotes(notes: MutableList<Note>){
         model.notes = notes

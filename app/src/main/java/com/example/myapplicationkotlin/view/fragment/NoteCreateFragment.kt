@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.myapplicationkotlin.R
 import com.example.myapplicationkotlin.model.Note
@@ -24,9 +25,9 @@ class NoteCreateFragment : Fragment(R.layout.fragment_note_create), NoteCreateVi
 
     override fun onStart() {
         super.onStart()
-        requireActivity().findViewById<View>(R.id.saveButton).setOnClickListener { v: View? -> addNote() }
-        requireActivity().findViewById<EditText>(R.id.editTextTitle).setText("")
-        requireActivity().findViewById<EditText>(R.id.editTextText).setText("")
+        view?.findViewById<View>(R.id.saveButton)?.setOnClickListener { v: View? -> addNote() }
+        view?.findViewById<EditText>(R.id.editTextTitle)?.setText("")
+        view?.findViewById<EditText>(R.id.editTextText)?.setText("")
     }
 
     override fun addNote() {
@@ -35,8 +36,8 @@ class NoteCreateFragment : Fragment(R.layout.fragment_note_create), NoteCreateVi
 
     val note: Note
         get() = Note(
-            requireActivity().findViewById<EditText>(R.id.editTextTitle).text.toString(),
-            requireActivity().findViewById<EditText>(R.id.editTextText).text.toString(),
+            view?.findViewById<EditText>(R.id.editTextTitle)?.text.toString(),
+            view?.findViewById<EditText>(R.id.editTextText)?.text.toString(),
             Date().toString()
         )
 }

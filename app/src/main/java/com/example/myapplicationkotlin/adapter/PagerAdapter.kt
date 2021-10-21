@@ -8,7 +8,5 @@ import com.example.myapplicationkotlin.view.fragment.PagerFragment
 class PagerAdapter(fragment: Fragment, var position2: Int, var size: Int, var notes: MutableList<Note>) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = size
 
-    override fun createFragment(position: Int): Fragment {
-        return PagerFragment(notes[(position + position2) % size])
-    }
+    override fun createFragment(position: Int) = PagerFragment(notes[(position + position2) % size])
 }

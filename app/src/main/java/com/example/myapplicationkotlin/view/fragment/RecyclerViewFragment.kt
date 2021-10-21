@@ -52,12 +52,13 @@ class RecyclerViewFragment(var db: AppDatabase) : Fragment(R.layout.fragment_rec
     }
 
     fun setData(notes: MutableList<Note>){
-        presenter = RecyclerViewPresenter(db, activity as MainActivity)
-        presenter.setNotes(notes)
+        presenter = RecyclerViewPresenter(db, activity as MainActivity).apply { presenter.setNotes(notes) }
     }
 
     fun initAdapter(notes: MutableList<Note>){
-        adapter.setNotes(notes)
-        adapter.notifyDataSetChanged()
+        with(adapter){
+            setNotes(notes)
+            notifyDataSetChanged()
+        }
     }
 }

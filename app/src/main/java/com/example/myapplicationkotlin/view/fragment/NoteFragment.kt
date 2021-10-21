@@ -45,21 +45,24 @@ class NoteFragment(var db: AppDatabase) : Fragment(R.layout.fragment_note), Note
 
         adapter = PagerAdapter(this, presenter.getIndexNote(note), presenter.getSize(),  presenter.getNotes())
         viewPager = requireActivity().findViewById(R.id.pager)
-        viewPager.adapter = adapter
-        viewPager.isSaveEnabled = false
-
+        with(viewPager){
+            adapter = adapter
+            isSaveEnabled = false
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     override fun shareNote() {
         val note = presenter.getNotes()[(viewPager.currentItem + adapter.position2) % adapter.size]
         val sendIntent = Intent()
-        sendIntent.action = Intent.ACTION_SEND
-        sendIntent.putExtra(
-            Intent.EXTRA_TEXT,
-            "\n${note.date} ${note.header} ${note.body} Отправлено из приложения MyNote"
-        )
-        sendIntent.type = "text/plain"
+        with(sendIntent) {
+            action = Intent.ACTION_SEND
+            putExtra(
+                Intent.EXTRA_TEXT,
+                "\n${note.date} ${note.header} ${note.body} Отправлено из приложения MyNote"
+            )
+            type = "text/plain"
+        }
         startActivity(Intent.createChooser(sendIntent, null))
     }
 
@@ -68,8 +71,7 @@ class NoteFragment(var db: AppDatabase) : Fragment(R.layout.fragment_note), Note
     }
 
     fun setData(notes: MutableList<Note>){
-        presenter = NoteFragmentPresenter(db, this)
-        presenter.setNotes(notes)
+        presenter = NoteFragmentPresenter(db, this).apply { setNotes(notes) }
     }
 
     fun deleteNote(note: Note) {

@@ -18,8 +18,10 @@ class PagerFragment(var note: Note) : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            view.findViewById<TextView>(R.id.noteTitle).text = note.header
-            view.findViewById<TextView>(R.id.noteDate).text = note.date
-            view.findViewById<TextView>(R.id.noteText).text = note.body
+        with(view) {
+            findViewById<TextView>(R.id.noteTitle).text = note.header
+            findViewById<TextView>(R.id.noteDate).text = note.date
+            findViewById<TextView>(R.id.noteText).text = note.body
+        }
     }
 }

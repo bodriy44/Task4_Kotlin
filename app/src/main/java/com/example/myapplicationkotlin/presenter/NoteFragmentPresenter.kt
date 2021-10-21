@@ -12,17 +12,12 @@ class NoteFragmentPresenter(var db: AppDatabase, var view: NoteView) {
         model.notes = notes
     }
 
-    fun getNotes(): MutableList<Note>{
-        return model.notes
-    }
+    fun getNotes() = model.notes
 
-    fun getIndexNote(note: Note): Int {
-        return model.getIndexNote(note)
-    }
+    fun getIndexNote(note: Note) = model.getIndexNote(note)
 
-    fun getSize(): Int{
-        return model.getSize()
-    }
+
+    fun getSize() = model.getSize()
 
     suspend fun deleteNote(note: Note){
         db.noteDao().deleteNote(note)

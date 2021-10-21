@@ -20,9 +20,8 @@ class RecyclerViewPresenter (var db: AppDatabase, var view: IMainView) {
         view.showNote(model.getNote(index))
     }
 
-    fun getNotes(): MutableList<Note>{
-        return model.notes
-    }
+    fun getNotes() = model.notes
+
 
     suspend fun getAllNotes() = db.noteDao().getAll()
 

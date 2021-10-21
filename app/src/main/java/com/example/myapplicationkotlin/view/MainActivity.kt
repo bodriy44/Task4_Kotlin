@@ -30,8 +30,6 @@ class MainActivity : FragmentActivity(), IMainView {
         presenter = MainPresenter(this, AppDatabase.getDatabase(this))
         noteCreateFragment = NoteCreateFragment()
         noteFragment = NoteFragment(AppDatabase.getDatabase(this))
-
-
         recyclerViewFragment = RecyclerViewFragment(AppDatabase.getDatabase(this))
         lifecycleScope.launch {
             recyclerViewFragment.setData(presenter.getAllNotes() as MutableList<Note>)

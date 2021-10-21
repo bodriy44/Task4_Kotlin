@@ -21,22 +21,22 @@ class NoteAdapter(private val onNoteClickListener: OnNoteClickListener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val note = notes[position]
-        holder.headerView.text = note.header
-        holder.dateView.text = note.date
-        holder.itemView.setOnClickListener { v: View? -> onNoteClickListener.onNoteClick(position) }
+        with(holder){
+            headerView.text = note.header
+            dateView.text = note.date
+            itemView.setOnClickListener { v: View? ->
+                onNoteClickListener.onNoteClick(position)
+            }
+        }
     }
 
-    override fun getItemCount(): Int {
-        return notes.size
-    }
+    override fun getItemCount() = notes.size
 
     fun setNotes(notes: List<Note>) {
         this.notes = notes
     }
 
-    fun getNotes(): List<Note> {
-        return this.notes
-    }
+    fun getNotes(): List<Note> = this.notes
 
     class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dateView: TextView

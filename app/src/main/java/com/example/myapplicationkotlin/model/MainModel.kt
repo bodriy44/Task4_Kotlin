@@ -9,20 +9,15 @@ class MainModel {
         notes.add(note)
     }
 
-    fun getIndexNote(note: Note): Int{
-        return notes.indexOf(note)
-    }
+    fun getIndexNote(note: Note) = notes.indexOf(note)
+
     fun deleteNote(note: Note) {
         notes.removeAt(notes.indexOf(note))
     }
 
-    fun getSize(): Int{
-        return notes.size
-    }
+    fun getSize() = notes.size
 
-    fun getNote(index: Int): Note {
-        return notes[index]
-    }
+    fun getNote(index: Int) = notes[index]
 
     init {
         notes = ArrayList()
